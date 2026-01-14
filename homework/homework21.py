@@ -36,9 +36,36 @@ students = [("class1", "Alice"), ("class2", "Bob"), ("class1", "Charlie"), ("cla
 from collections import defaultdict
 students = [("class1", "Alice"), ("class2", "Bob"), ("class1", "Charlie"), ("class3", "Daisy")]
 
-def group_by_class (students):
-    grupped = defaultdict(list)
-    for student in students:
-        grupped[student[0]].append(student[1])
+def group_by_class(students):
+    grouped = defaultdict(list)
+    for cls, name in students:
+        grouped[cls].append(name)
+    return dict(grouped)
+
+# вариант без распаковки
+# def group_by_class (students):
+#     grouped = defaultdict(list)
+#     for student in students:
+#         grouped[student[0]].append(student[1])
+#     return dict(grouped)
+
+# вариант если обычный словарь с if
+# def group_by_class(students):
+#     grouped = {}
+#     for cls, name in students:
+#         if cls not in grouped:
+#             grouped[cls] = []
+#         grouped[cls].append(name)
+#     return grouped
+
+# вариант обычный словарь через setdefault
+# def group_by_class(students):
+#     grouped = {}
+#     for cls, name in students:
+#         grouped.setdefault(cls, []).append(name)
+#     return grouped
+
+
+
 print(group_by_class(students))
 
