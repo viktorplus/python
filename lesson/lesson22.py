@@ -145,3 +145,27 @@
 # # Умножение всех элементов списка, начиная с 10
 # result = reduce(lambda x, y: x * y, numbers, 10)
 # print(result)  # 240
+
+# words = [
+#     'mango', 'grape', 'apple', 'Strawberry',
+#     'Banana', 'pineapple', 'kiwi', 'blueberry'
+# ]
+#
+# result = sorted(
+#     words,
+#     key=lambda word: (word[0].lower(), word[-1])
+# )
+#
+# print(result)
+#
+# # или лямбда
+# words = [
+#     'mango', 'grape', 'apple', 'Strawberry',
+#     'Banana', 'pineapple', 'kiwi', 'blueberry'
+# ]
+#
+# def sort_key(word):
+#     return (word[0].lower(), word[-1])
+#
+# result = sorted(words, key=sort_key)
+# print(result)

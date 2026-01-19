@@ -19,6 +19,8 @@ text = "Programming is fun!"
 #
 # def text_to_dict(text):
 #     letters = [c.lower() for c in text if c.isalpha()]
+#     # letters = [c for c in text.lower() if c.isalpha()]
+#
 #     return dict(Counter(letters))
 #
 # text = "Programming is fun!"
@@ -33,14 +35,14 @@ students = [("class1", "Alice"), ("class2", "Bob"), ("class1", "Charlie"), ("cla
 Пример вывода:
 {'class1': ['Alice', 'Charlie'], 'class2': ['Bob'], 'class3': ['Daisy']}"""
 
-from collections import defaultdict
-students = [("class1", "Alice"), ("class2", "Bob"), ("class1", "Charlie"), ("class3", "Daisy")]
-
-def group_by_class(students):
-    grouped = defaultdict(list)
-    for cls, name in students:
-        grouped[cls].append(name)
-    return dict(grouped)
+# from collections import defaultdict
+# students = [("class1", "Alice"), ("class2", "Bob"), ("class1", "Charlie"), ("class3", "Daisy")]
+#
+# def group_by_class(students):
+#     grouped = defaultdict(list)
+#     for cls, name in students:
+#         grouped[cls].append(name)
+#     return dict(grouped)
 
 # вариант без распаковки
 # def group_by_class (students):
@@ -67,5 +69,5 @@ def group_by_class(students):
 
 
 
-print(group_by_class(students))
+# print(group_by_class(students))
 

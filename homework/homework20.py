@@ -10,7 +10,7 @@ n = 17
 # def prime(m):
 #     if m < 2:
 #         return False
-#     for i in range(2, m):
+#     for i in range(2, int(m ** (1/2)+1):
 #         if m % i == 0:
 #             return False
 #     return True
@@ -50,10 +50,23 @@ print(filter_numbers("prime", 2, 3, 5, 7))
 #         else:
 #             return "Некорректный фильтр"
 #     return result
+
+# def filter_numbers(filter_type, *numbers):
+#     if filter_type == "even":
+#         return [n for n in numbers if n % 2 == 0]
+#
+#     if filter_type == "odd":
+#         return [n for n in numbers if n % 2 != 0]
+#
+#     return "Некорректный фильтр"
 #
 # print(filter_numbers("even", 1, 2, 3, 4, 5, 6))
 # print(filter_numbers("odd", 10, 15, 20, 25))
 # print(filter_numbers("prime", 2, 3, 5, 7))
+
+
+
+
 """
 Объединение словарей
 Напишите функцию, которая принимает любое количество словарей и объединяет их в один. 
