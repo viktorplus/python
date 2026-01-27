@@ -19,7 +19,12 @@ def join_data(data: list) -> str:
     """
     return " | ".join(map(str, data))
 
+def join_data2(data: list) -> str:
+    return " | ".join([str(item) for item in data])
+
 print(join_data(data))
+print(join_data2(data))
+
 
 # 2. Сумма вложенных чисел
 # Напишите функцию, которая принимает список словарей, где каждый словарь содержит имя пользователя и 
@@ -48,4 +53,9 @@ def sum_scores(data: list[dict[str, list[int]]]) -> int:
         total_score += sum(dic["scores"])
     return total_score
 
+def sum_scores2(data: list[dict[str, list[int]]]) -> int:
+    return sum(sum(dic["scores"]) for dic in data)
+
+
 print(f"Итоговый балл: {sum_scores(data)}")
+print(f"Итоговый балл: {sum_scores2(data)}")
