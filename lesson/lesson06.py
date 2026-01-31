@@ -60,26 +60,45 @@
 # # Используем константу pi напрямую
 # print(pi)
 # print(factorial(5))
-#
+# #
+# import sys
+# print(sys.executable)
+
+
 # import math
-#
+
 # # Округление вверх: 5
 # print(math.ceil(4.3))
+# print(math.ceil(4.8))
+
 # # Округление вниз: 4
 # print(math.floor(4.8))
+# print(math.floor(4.3)
+#       )
 
-# print(0.1 + 0.2)  # Ожидаем 0.3
 
-# Импортируем класс Decimal из модуля decimal
-from decimal import Decimal
+# # print(0.1 + 0.2)  # Ожидаем 0.3
 
-# Создаём два объекта класса Decimal с помощью строк '0.1' и '0.2'
-# Это гарантирует, что числа будут точно представлены в десятичном формате
-x = 0.1
-print(type(x))
-a = Decimal('0.1')
-print(type(a))
-b = Decimal('0.2')
-# Сложение без ошибки округления
-c = a + b
-print(c)  # Вывод: 0.3
+# # Импортируем класс Decimal из модуля decimal
+# from decimal import Decimal
+
+# # Создаём два объекта класса Decimal с помощью строк '0.1' и '0.2'
+# # Это гарантирует, что числа будут точно представлены в десятичном формате
+# x = 0.1
+# print(type(x))
+# a = Decimal('0.1')
+# print(type(a))
+# b = Decimal('0.2')
+# # Сложение без ошибки округления
+# c = a + b
+# print(c)  # Вывод: 0.3
+
+
+
+
+
+
+
+
+
+

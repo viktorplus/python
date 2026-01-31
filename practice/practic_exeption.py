@@ -75,3 +75,14 @@ result = deep_copy(original_data)
 result[0].append(55)
 print(result)
 print(original_data)
+
+
+"""Напишите рекурсивную функцию, которая суммирует все числа во вложенных списках.
+Пример вывода: 28"""
+nested_numbers = [1, [2, 3], [4, [5, 6]], 7]
+
+def deep_sun(nested_numbers):
+    sum =0
+    for i in nested_numbers:
+        
+
