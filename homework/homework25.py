@@ -18,7 +18,7 @@
 #         print("Ошибка: Нельзя делить на ноль")
 #
 # result = division()
-# if result:
+# if result is not None:
 #     print(result)
 
 """Логирование ошибок
