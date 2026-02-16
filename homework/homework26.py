@@ -15,7 +15,41 @@ python script.py /home/user/documents
 - file1.txt
 - file2.txt
 - notes.docx
+"""
+import os
+import sys
 
+if len(sys.argv) != 2:
+    print(f"Параметры запуска: python {sys.argv[0]} <path>")
+    sys.exit(1)
+
+list_dir = sys.argv[1]
+
+if not os.path.isdir(list_dir):
+    print("Директория не существует")
+    sys.exit(1)
+
+folders = []
+files = []
+
+for name in os.listdir(list_dir):
+    path = os.path.join(list_dir, name)
+    if os.path.isdir(path):
+        folders.append(name)
+    elif os.path.isfile(path):
+        files.append(name)
+
+print(f"Содержимое директории '{list_dir}':")
+print("Папки:")
+for f in folders:
+    print(f"- {f}")
+
+print("\nФайлы:")
+for f in files:
+    print(f"- {f}")
+
+
+"""
 Поиск и удаление файлов с указанным расширением
 Напишите программу, которая:
 Принимает путь к директории и расширение файлов через аргумент командной строки.
@@ -38,140 +72,40 @@ python script.py /home/user/PycharmProjects/project1 .log
 
 """
 
-#!/usr/bin/env python3
-# script.py
+import os
+import sys
 
-import argparse
-from pathlib import Path
+# Проверяем, передан ли аргумент
+if len(sys.argv) != 3:
+    print("Использование: python script.py <путь к папке> <расширение>")
+    sys.exit(1)
 
+path_to_folder = sys.argv[1]
+extension = sys.argv[2]
+found_files = []
 
-def list_dir_contents(dir_path: Path) -> None:
-    """Показывает содержимое директории: отдельно папки и отдельно файлы (без рекурсии)."""
-    if not dir_path.exists():
-        raise FileNotFoundError(f"Директория не найдена: {dir_path}")
-    if not dir_path.is_dir():
-        raise NotADirectoryError(f"Это не директория: {dir_path}")
+# Рекурсивный поиск файлов
+for root, _, files in os.walk(path_to_folder):
+    for file in files:
+        if file.endswith(extension):
+            found_files.append(os.path.join(root, file))
 
-    folders = []
-    files = []
+# Если файлов нет, завершаем программу
+if not found_files:
+    print(f"Файлы с расширением '{extension}' не найдены.")
+    sys.exit(0)
 
-    for entry in dir_path.iterdir():
-        if entry.is_dir():
-            folders.append(entry.name)
-        elif entry.is_file():
-            files.append(entry.name)
+# Выводим список файлов
+print(f"Найдены файлы с расширением '{extension}':")
+for file in found_files:
+    print("-", file)
 
-    folders.sort(key=str.lower)
-    files.sort(key=str.lower)
-
-    print(f"Содержимое директории '{dir_path}':")
-
-    print("Папки:")
-    if folders:
-        for name in folders:
-            print(f"- {name}")
-    else:
-        print("(нет)")
-
-    print("\nФайлы:")
-    if files:
-        for name in files:
-            print(f"- {name}")
-    else:
-        print("(нет)")
-
-
-def normalize_ext(ext: str) -> str:
-    """Нормализует расширение: 'log' -> '.log', '.LOG' -> '.log'."""
-    ext = ext.strip()
-    if not ext:
-        raise ValueError("Расширение пустое.")
-    if not ext.startswith("."):
-        ext = "." + ext
-    return ext.lower()
-
-
-def find_files_by_extension(dir_path: Path, ext: str) -> list[Path]:
-    """Рекурсивно ищет файлы по расширению (case-insensitive)."""
-    if not dir_path.exists():
-        raise FileNotFoundError(f"Директория не найдена: {dir_path}")
-    if not dir_path.is_dir():
-        raise NotADirectoryError(f"Это не директория: {dir_path}")
-
-    ext = normalize_ext(ext)
-    found: list[Path] = []
-
-    for p in dir_path.rglob("*"):
-        if p.is_file() and p.suffix.lower() == ext:
-            found.append(p)
-
-    found.sort(key=lambda x: str(x).lower())
-    return found
-
-
-def ask_yes_no(prompt: str) -> bool:
-    """Да/нет вопрос. Принимает: y/yes/д/да, n/no/н/нет."""
-    while True:
-        answer = input(prompt).strip().lower()
-        if answer in {"y", "yes", "д", "да"}:
-            return True
-        if answer in {"n", "no", "н", "нет"}:
-            return False
-        print("Введите 'y/yes/да' или 'n/no/нет'.")
-
-
-def delete_files(files: list[Path], base_dir: Path) -> None:
-    """Удаляет файлы, печатает результат. Пути выводит относительно base_dir."""
-    deleted = 0
-    failed = 0
-
-    for f in files:
-        rel = f.relative_to(base_dir)
-        try:
-            f.unlink()
-            print(f"Удалён: {rel}")
-            deleted += 1
-        except Exception as e:
-            print(f"НЕ удалён: {rel} ({e})")
-            failed += 1
-
-    print(f"\nИтог: удалено {deleted}, ошибок {failed}.")
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Список папок/файлов или поиск и удаление файлов по расширению."
-    )
-    parser.add_argument("path", help="Путь к директории")
-    parser.add_argument(
-        "extension",
-        nargs="?",
-        help="Расширение для поиска (например .log или log). Если не указано — просто листинг.",
-    )
-
-    args = parser.parse_args()
-    dir_path = Path(args.path).expanduser().resolve()
-
-    if args.extension is None:
-        list_dir_contents(dir_path)
-        return
-
-    ext = normalize_ext(args.extension)
-    files = find_files_by_extension(dir_path, ext)
-
-    if not files:
-        print(f"Файлы с расширением '{ext}' не найдены в '{dir_path}'.")
-        return
-
-    print(f"Найдены файлы с расширением '{ext}':")
-    for f in files:
-        print(f"- {f.relative_to(dir_path)}")
-
-    if ask_yes_no("\nУдалить найденные файлы? (y/n): "):
-        delete_files(files, dir_path)
-    else:
-        print("Удаление отменено.")
-
-
-if __name__ == "__main__":
-    main()
+# Спрашиваем у пользователя, хочет ли он их удалить
+confirm = input("\nВы хотите удалить эти файлы? (y/n): ")
+if confirm.lower() == "y":
+    # Удаляем файлы
+    for file in found_files:
+        os.remove(file)
+    print("Удаление завершено.")
+else:
+    print("Удаление отменено.")
