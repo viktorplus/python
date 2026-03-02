@@ -113,16 +113,16 @@ T-shirt - Blue - S
 ...
 Jacket - Black - L
 """
-import itertools
-
-def outfit_combinations(clothes, colors, sizes):
-    return (f"{clothe} - {color} - {size}" for clothe, color, size in itertools.product(clothes, colors, sizes))
-
-clothes = ["T-shirt", "Jeans", "Jacket"]
-colors = ["Red", "Blue", "Black"]
-sizes = ["S", "M", "L"]
-
-for combo in outfit_combinations(clothes, colors, sizes):
-    print(combo)
+# import itertools
+#
+# def outfit_combinations(clothes, colors, sizes):
+#     return (f"{clothe} - {color} - {size}" for clothe, color, size in itertools.product(clothes, colors, sizes))
+#
+# clothes = ["T-shirt", "Jeans", "Jacket"]
+# colors = ["Red", "Blue", "Black"]
+# sizes = ["S", "M", "L"]
+#
+# for combo in outfit_combinations(clothes, colors, sizes):
+#     print(combo)
 
 
