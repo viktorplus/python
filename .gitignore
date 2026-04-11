@@ -31,6 +31,6 @@ coverage.xml
 .pytype/
 .pyright/
 cython_debug/
-.ipynb_checkpoints/
+practice/.ipynb_checkpoints/
 .vscode/
 *.txt

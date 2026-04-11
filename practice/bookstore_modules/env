@@ -1,0 +1,11 @@
+MYSQL_READ_HOST=ich-db.edu.itcareerhub.de
+MYSQL_READ_PORT=3306
+MYSQL_READ_USER=ich1
+MYSQL_READ_PASSWORD=password
+MYSQL_READ_DB=world
+
+MYSQL_EDIT_HOST=ich-edit.edu.itcareerhub.de
+MYSQL_EDIT_PORT=3306
+MYSQL_EDIT_USER=ich1
+MYSQL_EDIT_PASSWORD=ich1_password_ilovedbs
+MYSQL_EDIT_DB=world
